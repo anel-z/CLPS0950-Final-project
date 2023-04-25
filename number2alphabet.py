@@ -7,6 +7,6 @@ def NumtoAlph(number):
     return alphabet_list[number]
     
 
-print(NumtoAlph[6])
+
 
 
