@@ -1,3 +1,6 @@
+from only_the_words import word_list_spring
+from only_the_words import word_list_school
+
 import tkinter as tk
 
 entered_words = []
@@ -11,6 +14,11 @@ def store_input():
     print("Input stored:", user_input)
     entered_words.append(user_input)
     print(entered_words)
+
+# i used spring list but maybe later we could find a way to integrate 
+# several lists
+if user_input in word_list_spring:
+    print('You found the word!')
 
 # Create a window
 root = tk.Tk()
