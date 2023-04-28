@@ -23,5 +23,8 @@ def randomwordfunction(n):
 
  print(random_words)
 
+ #print(str(random_words()).split(1))
+
+
 randomwordfunction(5)
 
