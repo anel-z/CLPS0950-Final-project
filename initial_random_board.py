@@ -11,7 +11,7 @@ def board(int):
   return array
 
 
-board(15)
+print(board(15))
 
 
 

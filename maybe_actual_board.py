@@ -1,45 +1,73 @@
-
-import numpy as np
-from numpy import random
-from number2alphabet import NumtoAlph
-import random_word
-from random_word import RandomWords
-r = RandomWords()
+from only_the_words import word_list_spring
+from only_the_words import word_list_school
+import random
 
 
-def randomwordfunction(n):
- random_words = [ ]
- for x in range (0,n):
-  random_words.append(str(r.get_random_word()))
-  
-
- print(random_words)
+def generate_board(num):
+    from initial_random_board import board
+    return board(num)
 
 
 
-def board(int):
-  array = np.chararray((int,int))
-  for n in range (0,int):
-    for x in range (0,int):
-     array[x,n] = NumtoAlph(random.randint(26))
+words_for_board = random.sample(word_list_school, 8)
+print('word bank')
+print(words_for_board)
+#print(len(words_for_board))
 
-     return array
+big_lists = []
 
-  #  array[:,n] = NumtoAlph(random.randint(26))
-  print(array)
+for word in words_for_board:
+    letter_list = []
+    for letter in word:
+        letter_list.append(letter)
+    big_lists.append(letter_list)
 
 
-my_board = board(15)
-my_words = randomwordfunction(5)
-#print(my_words[1])
-
-#for n in range (0,5):
- # my_board[random.rand.int(25), random.rand.int(25)] = my_words(n)
-#print(my_board)
+print(words_for_board)
+print(letter_list)
+print(big_lists)
 
 
 
+#for n in range (0, len(words_for_board)):
+#  for x in range (0, len(big_lists[n])):
+  #  print(big_lists[n][x])
+
+
+used_indices = []
+searchboard = generate_board(15)
+for n in range (0, len(words_for_board)):
+    for x in range (0, len(big_lists[n])):
+      row_index = random.randint(0, len(searchboard)-1 )
+      column_index = random.randint(0, len(searchboard[0])-1)
+      random_index = (row_index, column_index)
+      if len(searchboard) - column_index >= len(words_for_board[n]):
+        for i in range (0, len(words_for_board[n])):
+         searchboard[row_index, column_index + i] = big_lists[n][i]
+      else:
+         searchboard[column_index, row_index] = 1
+         used_indices.append((n,x))
+print(used_indices)
+print('inserted' 'horizontally')
+    
+print(searchboard)   
+
+
+#generating a random index to test 
+row_index = random.randint(0, len(searchboard) )
+column_index = random.randint(0, len(searchboard[0]))
+random_index = (row_index, column_index)
+print(random_index)
 
 
 
 
+#used_indices = []
+#searchboard = generate_board(15)
+#for n in range (0, len(words_for_board)):
+  #for x in range (0, len(big_lists[n])):
+   # searchboard[x,n] = big_lists[n][x]
+   # used_indices.append((n,x))
+#print(used_indices)
+    
+#print(searchboard)   
