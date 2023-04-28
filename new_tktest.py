@@ -14,11 +14,12 @@ def store_input():
     print("Input stored:", user_input)
     entered_words.append(user_input)
     print(entered_words)
+    if user_input in word_list_spring:
+        print('You found the word!')
 
-# i used spring list but maybe later we could find a way to integrate 
+# ^^ i used spring list but maybe later we could find a way to integrate 
 # several lists
-if user_input in word_list_spring:
-    print('You found the word!')
+
 
 # Create a window
 root = tk.Tk()

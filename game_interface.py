@@ -397,3 +397,6 @@ def main(screen: pygame.Surface) -> None:
         screen.blit(run_server_button['surface'], run_server_button['pos'])
 
         pygame.display.flip()
+
+        pygame.quit()
+        exit()
