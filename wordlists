@@ -21,3 +21,29 @@ for n in range (0, len(shorten)):
 ##going forward-- use if statements to figure out which word list to use ? or maybe not even necessary
 # figure out with a test version how to replace the values in the array with the letters
 ## figure out how to randomize the indices of the replacement so don't get same board every time
+
+## cannot figure out how to just import directly
+import numpy as np
+from numpy import random
+from number2alphabet import NumtoAlph
+
+def board(int):
+  array = np.chararray((int,int))
+  for n in range (0,int):
+    for x in range (0,int):
+     array[x,n] = NumtoAlph(random.randint(26))
+  return array
+
+  #  array[:,n] = NumtoAlph(random.randint(26))
+  print(array)
+
+
+searchboard = board(15)
+for n in range (0, len(shorten)):
+  for x in range (0, len(big_lists[n])):
+    searchboard[x,n] = big_lists[n][x]
+print(searchboard)    
+
+
+##omg omg omg omg it worked!!!!!!
+
