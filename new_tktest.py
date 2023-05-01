@@ -3,6 +3,7 @@ from only_the_words import word_list_school
 from maybe_actual_board import words_for_board, searchboard
 
 import tkinter as tk
+from tkinter import messagebox
 
 entered_words = []
 
@@ -15,13 +16,30 @@ root = tk.Tk()
 def store_input():
     global user_input
     user_input = entry.get()
+    #answer = False <--- why doesn't this work?
     print("Input stored:", user_input)
     entered_words.append(user_input)
     print(entered_words)
     if user_input in words_for_board:
-        print('You found the word!')
+        print('You found a word!')
+        #answer = True <---
     else:
         print('Wrong word!!')
+
+# Create a function to update the entered words listbox
+def update_words_listbox():
+    words_listbox.delete(0, tk.END)
+    for word in entered_words:
+        words_listbox.insert(tk.END, word)
+
+# Create a listbox to display the entered words
+words_listbox = tk.Listbox(root, width=12, height=4)
+words_listbox.pack(side=tk.BOTTOM)
+
+# Create a label for the entered words listbox
+words_label = tk.Label(root, text="Previous attempts:")
+words_label.pack(side=tk.BOTTOM)
+
 
 # displays grid from searchboard to window 
 # width and height make window bigger, shows whole grid now
@@ -36,11 +54,16 @@ for item in searchboard:
 entry = tk.Entry(root)
 entry.pack()
 
-# Create a button to store the input
-button = tk.Button(root, text="Check my word!", command=store_input)
+# Create a button to store the input and update the listbox
+button = tk.Button(root, text="Check my word!", command=lambda:[store_input(), update_words_listbox()])
 button.pack()
 
-
+# Create a popup message that tells you right or wrong after each attempt
+def popup_message(answer):
+    if answer == True:
+        messagebox.showinfo("Popup Message", "You found a word!")
+    else:
+        messagebox.showinfo("Popup Message", "Wrong word!!")
 
 # Start the GUI event loop
 root.mainloop()
