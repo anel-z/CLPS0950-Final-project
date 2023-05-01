@@ -24,8 +24,9 @@ def store_input():
         print('Wrong word!!')
 
 # displays grid from searchboard to window 
+# width and height make window bigger, shows whole grid now
 # but the b's are still there!! :(((
-grid = tk.Listbox(root)
+grid = tk.Listbox(root, width=45, height=15)
 grid.pack()
 for item in searchboard:
      grid.insert(tk.END, item)
