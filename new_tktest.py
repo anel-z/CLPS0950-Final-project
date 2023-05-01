@@ -16,16 +16,15 @@ root = tk.Tk()
 def store_input():
     global user_input
     user_input = entry.get()
-    #answer = False <--- why doesn't this work?
     print("Input stored:", user_input)
     entered_words.append(user_input)
     print(entered_words)
     if user_input in words_for_board:
         print('You found a word!')
-        #answer = True <---
+        messagebox.showinfo("Popup Message", "You found a word!")
     else:
         print('Wrong word!!')
-
+        messagebox.showinfo("Popup Message", "Wrong word!!")
 # Create a function to update the entered words listbox
 def update_words_listbox():
     words_listbox.delete(0, tk.END)
@@ -58,12 +57,7 @@ entry.pack()
 button = tk.Button(root, text="Check my word!", command=lambda:[store_input(), update_words_listbox()])
 button.pack()
 
-# Create a popup message that tells you right or wrong after each attempt
-def popup_message(answer):
-    if answer == True:
-        messagebox.showinfo("Popup Message", "You found a word!")
-    else:
-        messagebox.showinfo("Popup Message", "Wrong word!!")
+
 
 # Start the GUI event loop
 root.mainloop()
