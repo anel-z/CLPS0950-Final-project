@@ -5,4 +5,3 @@ word_list_school = ['classroom', 'public', 'private', 'homeschool', 'break', 'bu
 word_list_music = ['ballad', 'bass','treble', 'melody', 'cleft', 'piano', 'flute', 'oboe', 'trumpet', 'orchestra', 'conductor', 'singer', 'bass', 'tenor', 'soprano', 'alto', 'rap', 'pop', 'jazz', 'rock', 'funk', 'song', 'tune', 'microphone', 'performance', 'concert', 'cello', 'cymbals', 'drums', 'indie', 'crescendo', 'acapella', 'chord', 'symphony', 'band', 'blues', 'opera', 'guitar', 'lyrics', 'major', 'minor', 'flat', 'sharp', 'pitch', 'tone', 'scale', 'rhythm', 'chorus', 'harmony', 'note']
 
 word_list_sports = ['basketball', 'football', 'tennis', 'hockey', 'pingpong', 'soccer', 'baseball', 'golf', 'dance', 'skating', 'skiing', 'snowboarding', 'luge', 'gymnastics', 'swimming', 'field', 'court', 'rink', 'player', 'game', 'match', 'tournament', 'season', 'bat', 'club', 'stance', 'injury', 'score', 'goal', 'hoop', 'rugby', 'squash', 'waterpolo', '']
-print(len(word_list_sports))
