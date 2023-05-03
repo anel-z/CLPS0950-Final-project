@@ -9,8 +9,8 @@ def board(int):
     for x in range (0,int):
      array[x,n] = NumtoAlph(random.randint(26))
   return array
-
-
+  
+ 
 print(board(15))
 
 
