@@ -26,6 +26,7 @@ def store_input():
         print('Wrong word!!')
         messagebox.showinfo("Popup Message", "Wrong word!!")
 # Create a function to update the entered words listbox
+
 def update_words_listbox():
     words_listbox.delete(0, tk.END)
     for word in entered_words:
@@ -41,8 +42,7 @@ words_label.pack(side=tk.BOTTOM)
 
 
 # displays grid from searchboard to window 
-# width and height make window bigger, shows whole grid now
-# but the b's are still there!! :(((
+
 grid = tk.Listbox(root, width=45, height=15)
 grid.pack()
 for item in searchboard:
