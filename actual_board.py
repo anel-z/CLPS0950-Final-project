@@ -3,6 +3,7 @@ from only_the_words import word_list_school
 from only_the_words import word_list_music 
 from only_the_words import  word_list_sports
 from check_fit_function import check_fit
+import numpy as np
 import random
 
 
@@ -30,15 +31,17 @@ print(individual_letters)
 used_indices = []
 searchboard = generate_board(15)
 
-
-while len(words_for_board)> 0:
+n=0
+while n<len(words_for_board):
   possible_directions = []
-  n=0
+ # n=0
+  print(words_for_board[n])
   while possible_directions == []:
     len_word = len(words_for_board[n])
     size_board = len(searchboard)
-    row_index = random.randint(0, size_board-1 )
-    column_index = random.randint(0, len(searchboard[0])-1)
+    row_index = random.randint(0, size_board-1)
+    column_index = random.randint(0, size_board-1)
+                                  #len(searchboard[0])-1)
     random_index = (row_index, column_index)
     possible_directions = check_fit(row_index, column_index, len_word, size_board, used_indices)
     print(possible_directions)
@@ -46,50 +49,67 @@ while len(words_for_board)> 0:
 
   direction = random.sample(possible_directions, 1)
   print(direction)
-  words_for_board.pop(0)
-
+  
 
 
   if direction[0] == 'horizontal left':
     print("here 1")
-    for x in range (0, len_word):
+    for x in range (0, (len_word)):
+      print(individual_letters[n][x])
       searchboard[row_index] [column_index - x] = individual_letters[n][x]
-      used_indices.append[[row_index] [column_index - x]]
-    words_for_board.pop(0)
+      used_indices.append((row_index, column_index - x))
 
   elif direction[0] == 'horizontal right':
-    for x in range (0, len_word):
+    print('here 2')
+    for x in range (0, (len_word)):
+     print(individual_letters[n][x])
      searchboard[row_index] [column_index + x] = individual_letters[n][x]
-     used_indices.append[(row_index, column_index + x)]
-    words_for_board.pop(0)
+     used_indices.append((row_index, column_index + x))
+    
   elif direction[0] == 'vertical up':
     print("here 3")
-    for x in range (0, len_word):
-      searchboard[(row_index-x, column_index)] = individual_letters[n][x]
-      used_indices.append[[row_index-x] [column_index]]
-    words_for_board.pop(0)
+    for x in range (0, (len_word)):
+      print(individual_letters[n][x])
+      searchboard[row_index-x][column_index] = individual_letters[n][x]
+      used_indices.append((row_index-x, column_index))
+    
   elif direction[0] == 'vertical down':
     print("here 4")
     for x in range (0, len_word):
-      searchboard[(row_index+x, column_index)] = individual_letters[n][x]
-      used_indices.append[(row_index+x,column_index)]
-    words_for_board.pop(0)
+      print(individual_letters[n][x])
+      searchboard[row_index+x][column_index] = individual_letters[n][x]
+      used_indices.append((row_index+x, column_index))
+ 
   elif direction[0] == 'diagonal top to bottom':
     print("here 5")
     for x in range (0, len_word):
-      searchboard[(row_index-x, column_index-x)] = individual_letters[n][x]
-      used_indices.append[[row_index-x] [column_index-x]]
-    words_for_board.pop(0)
-  elif direction[0] == 'diagonal top to bottom':
+      print(individual_letters[n][x])
+      searchboard[row_index+x] [column_index-x] = individual_letters[n][x]
+      used_indices.append((row_index+x, column_index-x))
+
+  elif direction[0] == 'diagonal bottom to top':
     print("here 6")
     for x in range (0, len_word):
-      searchboard[(row_index+x,column_index+x)] = individual_letters[n][x]
-      used_indices.append[[row_index+x] [column_index+x]]
-    words_for_board.pop(0)
-  
+      print(individual_letters[n][x])
+      searchboard[row_index-x] [column_index+x] = individual_letters[n][x]
+      used_indices.append((row_index-x, column_index+x))
+  print('at the end of outer while loop',used_indices)
+
+  #words_for_board.pop(0)
+  n += 1 
   print(words_for_board)
 
-print(searchboard)  
+print(searchboard) 
+print(used_indices) 
+counter ={}
+for d in used_indices:
+  if d not in counter:
+    counter[d]=0
+  counter[d]+=1
+if any(np.array(list(counter.values()))>1):
+  print('ERROR')
+  print(counter)
+#print(np.unique(np.array(used_indices),return_counts=True))
 #once i replace the letters, delete words_for_board[0] from the list
 
   
