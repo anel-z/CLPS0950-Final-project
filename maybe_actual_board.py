@@ -30,6 +30,8 @@ print(individual_letters)
 used_indices = []
 searchboard = generate_board(15)
 
+
+
 for n in range (0, len(words_for_board)):
   len_word = len(words_for_board[n])
   size_board = len(searchboard)
@@ -40,7 +42,9 @@ for n in range (0, len(words_for_board)):
   direction = random.sample(directions, 1)
   print(direction)
 
-
+# are directions and direction different variables?
+# which one is used here? directions is a lcoal variable in a different 
+# function and I can't call it
 
 
 
