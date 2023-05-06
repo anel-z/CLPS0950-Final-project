@@ -1,6 +1,6 @@
 from only_the_words import word_list_spring
 from only_the_words import word_list_school
-from maybe_actual_board import words_for_board, searchboard
+from actual_board import words_for_board, searchboard
 
 import tkinter as tk
 from tkinter import messagebox
