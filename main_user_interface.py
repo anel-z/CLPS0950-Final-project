@@ -6,25 +6,37 @@ import tkinter as tk
 from tkinter import messagebox
 
 entered_words = []
+correct_words = []
 
 # Create a window
 root = tk.Tk()
 
 #stores input in user_input and appends it to entered_words list
 #prints both last entered word and list with all entered words
-
+#checks if user_input is a correct word, tells you how many you've found in total if so
+#messages tell you if it's correct, wrong, or already entered
+#final message says you've found all words.
 def store_input():
     global user_input
     user_input = entry.get()
     print("Input stored:", user_input)
     entered_words.append(user_input)
     print(entered_words)
-    if user_input in words_for_board:
+    global correct_words
+    if user_input in correct_words:
+        messagebox.showinfo("Popup Message", "You've already entered this word.")
+    elif (user_input in words_for_board) and len(correct_words)<7:
         print('You found a word!')
         messagebox.showinfo("Popup Message", "You found a word!")
+        correct_words.append(user_input)
+    elif (user_input in words_for_board) and len(correct_words)==7:
+        messagebox.showinfo("Popup Message", "You found all the words! Yay!!" )
     else:
         print('Wrong word!!')
         messagebox.showinfo("Popup Message", "Wrong word!!")
+        return
+    
+   
 # Create a function to update the entered words listbox
 
 def update_words_listbox():
@@ -40,9 +52,24 @@ words_listbox.pack(side=tk.BOTTOM)
 words_label = tk.Label(root, text="Previous attempts:")
 words_label.pack(side=tk.BOTTOM)
 
+text_box = tk.Text(root, height=1, width=30)
+def score_textbox():
+    global text_box
+    correct_score = len(correct_words)
+    text_box.delete(1.0, tk.END)
+    text_box.insert(tk.END, f"You've found {correct_score} / 8 words!")
+def update_text_box():
+    score_textbox()
+    root.after(1000, update_text_box) # Update the text box every second
+
+
+score_textbox()
+
+text_box.pack(side=tk.BOTTOM)
+
+update_text_box()
 
 # displays grid from searchboard to window 
-
 grid = tk.Listbox(root, width=45, height=15)
 grid.pack()
 for item in searchboard:
