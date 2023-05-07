@@ -70,10 +70,20 @@ text_box.pack(side=tk.BOTTOM)
 update_text_box()
 
 # displays grid from searchboard to window 
-grid = tk.Listbox(root, width=45, height=15)
-grid.pack()
-for item in searchboard:
-     grid.insert(tk.END, item)
+#grid = tk.Listbox(root, width=45, height=15, justify='center')
+#grid.pack()
+
+    
+# Create a frame to hold the grid of letters
+grid_frame = tk.Frame(root)
+grid_frame.pack()
+
+# Use a nested loop to create a grid of labels to display the letters
+for i in range(len(searchboard)):
+    for j in range(len(searchboard[i])):
+        # Create a label for the letter and add it to the grid frame
+        letter_label = tk.Label(grid_frame, text=searchboard[i][j], width=3, height=1, font=("Helvetica", 15))
+        letter_label.grid(row=i, column=j)
 
 
 # Create an entry box
@@ -86,5 +96,7 @@ button.pack()
 
 
 
+
 # Start the GUI event loop
 root.mainloop()
+

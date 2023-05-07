@@ -107,3 +107,9 @@ for d in used_indices:
 if any(np.array(list(counter.values()))>1):
   print('ERROR')
   print(counter)
+
+for row in searchboard:
+    for letter in row:
+        print(letter, end=' ')
+    print()
+
