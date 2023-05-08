@@ -26,12 +26,11 @@ for word in words_for_board:
 
 print(individual_letters)
 
-
-
 used_indices = []
 searchboard = generate_board(15)
 
 n=0
+letter_positions = {w : [] for w in words_for_board}
 while n<len(words_for_board):
   possible_directions = []
   print(words_for_board[n])
@@ -47,14 +46,13 @@ while n<len(words_for_board):
 
   direction = random.sample(possible_directions, 1)
   print(direction)
-  
-
 
   if direction[0] == 'horizontal left':
     print("here 1")
     for x in range (0, (len_word)):
       print(individual_letters[n][x])
       searchboard[row_index] [column_index - x] = individual_letters[n][x]
+      letter_positions[words_for_board[n]].append(row_index * 15 + (column_index - x))
       used_indices.append((row_index, column_index - x))
 
   elif direction[0] == 'horizontal right':
