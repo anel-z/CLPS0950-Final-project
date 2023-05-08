@@ -30,6 +30,7 @@ def store_input():
         correct_words.append(user_input)
         update_letter_colors()
     elif (user_input in words_for_board) and len(correct_words)==7:
+        correct_words.append(user_input)
         messagebox.showinfo("Popup Message", "You found all the words! Yay!!" )
     else:
         print('Wrong word!!')
@@ -60,7 +61,7 @@ def score_textbox():
     text_box.insert(tk.END, f"You've found {correct_score} / 8 words!")
 def update_text_box():
     score_textbox()
-    #root.after(1000, update_text_box) # Update the text box every second
+    root.after(1000, update_text_box) # Update the text box every second
 
 
 score_textbox()
