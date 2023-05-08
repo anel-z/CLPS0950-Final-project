@@ -1,7 +1,4 @@
-from only_the_words import word_list_spring
-from only_the_words import word_list_school
-from actual_board import words_for_board, searchboard
-
+from actual_board import words_for_board, searchboard, letter_positions
 import tkinter as tk
 from tkinter import messagebox
 
@@ -11,6 +8,8 @@ correct_words = []
 # Create a window
 root = tk.Tk()
 
+global user_input
+user_input = ''
 #stores input in user_input and appends it to entered_words list
 #prints both last entered word and list with all entered words
 #checks if user_input is a correct word, tells you how many you've found in total if so
@@ -29,6 +28,7 @@ def store_input():
         print('You found a word!')
         messagebox.showinfo("Popup Message", "You found a word!")
         correct_words.append(user_input)
+        update_letter_colors()
     elif (user_input in words_for_board) and len(correct_words)==7:
         messagebox.showinfo("Popup Message", "You found all the words! Yay!!" )
     else:
@@ -60,7 +60,7 @@ def score_textbox():
     text_box.insert(tk.END, f"You've found {correct_score} / 8 words!")
 def update_text_box():
     score_textbox()
-    root.after(1000, update_text_box) # Update the text box every second
+    #root.after(1000, update_text_box) # Update the text box every second
 
 
 score_textbox()
@@ -78,12 +78,50 @@ update_text_box()
 grid_frame = tk.Frame(root)
 grid_frame.pack()
 
+letter_labelss = []
 # Use a nested loop to create a grid of labels to display the letters
 for i in range(len(searchboard)):
     for j in range(len(searchboard[i])):
         # Create a label for the letter and add it to the grid frame
         letter_label = tk.Label(grid_frame, text=searchboard[i][j], width=3, height=1, font=("Helvetica", 15))
         letter_label.grid(row=i, column=j)
+        letter_labelss.append(letter_label)
+        
+        #if searchboard[i][j] in entered_words:
+        #    letter_label.configure(foreground='red')
+
+        
+def update_letter_colors():
+    global user_input
+    print('updating colors')
+    # Iterate through all the labels and change the color if the word is found
+    for i, letter_label in enumerate(letter_labelss):
+        if i in letter_positions.get(user_input,[]):
+            letter_label.config(fg='red')
+            print(f'updating letter {searchboard[i//15][i%15]}')
+            letter_label.update()
+        else:
+            letter_label.config(fg='black')
+            letter_label.update()
+    grid_frame.update()
+    # root.after(100, update_letter_colors) # Update the color every 100 milliseconds
+
+# Call the update_letter_colors function to start updating the colors
+update_letter_colors()
+
+# def update_letter_colors():
+#     # Iterate through all the labels and change the color if the word is found
+#     for i, letter_label in enumerate(letter_labelss):
+#         if searchboard[j][i] in entered_words:
+#             letter_label.config(fg='red')
+#         else:
+#             letter_label.config(fg='black')
+#     root.after(100, update_letter_colors) # Update the color every 100 milliseconds
+
+# # Call the update_letter_colors function to start updating the colors
+# update_letter_colors()
+
+
 
 
 # Create an entry box

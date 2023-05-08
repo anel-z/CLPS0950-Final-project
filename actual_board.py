@@ -58,15 +58,17 @@ while n<len(words_for_board):
   elif direction[0] == 'horizontal right':
     print('here 2')
     for x in range (0, (len_word)):
-     print(individual_letters[n][x])
-     searchboard[row_index] [column_index + x] = individual_letters[n][x]
-     used_indices.append((row_index, column_index + x))
+      print(individual_letters[n][x])
+      searchboard[row_index] [column_index + x] = individual_letters[n][x]
+      letter_positions[words_for_board[n]].append(row_index * 15 + (column_index + x))
+      used_indices.append((row_index, column_index + x))
     
   elif direction[0] == 'vertical up':
     print("here 3")
     for x in range (0, (len_word)):
       print(individual_letters[n][x])
       searchboard[row_index-x][column_index] = individual_letters[n][x]
+      letter_positions[words_for_board[n]].append((row_index-x) * 15 + column_index)
       used_indices.append((row_index-x, column_index))
     
   elif direction[0] == 'vertical down':
@@ -74,6 +76,7 @@ while n<len(words_for_board):
     for x in range (0, len_word):
       print(individual_letters[n][x])
       searchboard[row_index+x][column_index] = individual_letters[n][x]
+      letter_positions[words_for_board[n]].append((row_index+x) * 15 + column_index)
       used_indices.append((row_index+x, column_index))
  
   elif direction[0] == 'diagonal top to bottom':
@@ -81,6 +84,7 @@ while n<len(words_for_board):
     for x in range (0, len_word):
       print(individual_letters[n][x])
       searchboard[row_index+x] [column_index-x] = individual_letters[n][x]
+      letter_positions[words_for_board[n]].append((row_index+x) * 15 + (column_index-x))
       used_indices.append((row_index+x, column_index-x))
 
   elif direction[0] == 'diagonal bottom to top':
@@ -88,6 +92,7 @@ while n<len(words_for_board):
     for x in range (0, len_word):
       print(individual_letters[n][x])
       searchboard[row_index-x] [column_index+x] = individual_letters[n][x]
+      letter_positions[words_for_board[n]].append((row_index-x) * 15 + (column_index+x))
       used_indices.append((row_index-x, column_index+x))
   print('at the end of outer while loop',used_indices)
 
