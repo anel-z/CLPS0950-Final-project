@@ -1,4 +1,6 @@
 import tkinter as tk
+import subprocess
+
 root = tk.Tk()
 
 #welcome text
@@ -7,11 +9,17 @@ next_label = tk.Label(root, text ="To start, pick a wordsearch topic:", font=("H
 title_label.grid(row=0, column=0, columnspan=2, padx=20, pady=20)
 next_label.grid(row=3, column=0, columnspan=2, padx=20, pady=20)
 
-#topic option buttons
-def start_spring_game():
-    import spring_game
-    spring_game.play_game()
-spring_button = tk.Button (root, text="spring", command=start_spring_game)
-spring_button.pack()
+spring_button = tk.Button(root, text="Spring", command=lambda: generate_wordsearch("spring_game.py"))
+school_button = tk.Button(root, text="School", command=lambda: generate_wordsearch("school_game.py"))
+music_button = tk.Button(root, text="Music", command=lambda: generate_wordsearch("music_game.py"))
+sports_button = tk.Button(root, text="Sports", command=lambda: generate_wordsearch("sports_game.py"))
+
+def generate_wordsearch (filename):
+    subprocess.run(["python", filename])
+
+spring_button.grid(row=4, column=0, padx=10, pady=10)
+school_button.grid(row=4, column=1, padx=10, pady=10)
+music_button.grid(row=5, column=0, padx=10, pady=10)
+sports_button.grid(row=5, column=1, padx=10, pady=10)
 
 root.mainloop()

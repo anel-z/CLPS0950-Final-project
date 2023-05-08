@@ -1,4 +1,5 @@
-from actual_board_spring import words_for_board_spring, searchboard, letter_positions
+from actual_board_sports import words_for_board_sports, searchboard, letter_positions
+
 import tkinter as tk
 from tkinter import messagebox
 
@@ -8,8 +9,6 @@ correct_words = []
 # Create a window
 root = tk.Tk()
 
-global user_input
-user_input = ''
 #stores input in user_input and appends it to entered_words list
 #prints both last entered word and list with all entered words
 #checks if user_input is a correct word, tells you how many you've found in total if so
@@ -24,12 +23,11 @@ def store_input():
     global correct_words
     if user_input in correct_words:
         messagebox.showinfo("Popup Message", "You've already entered this word.")
-    elif (user_input in words_for_board_spring) and len(correct_words)<7:
+    elif (user_input in words_for_board_sports) and len(correct_words)<7:
         print('You found a word!')
         messagebox.showinfo("Popup Message", "You found a word!")
         correct_words.append(user_input)
-        update_letter_colors()
-    elif (user_input in words_for_board_spring) and len(correct_words)==7:
+    elif (user_input in words_for_board_sports) and len(correct_words)==7:
         correct_words.append(user_input)
         messagebox.showinfo("Popup Message", "You found all the words! Yay!!" )
     else:
@@ -79,19 +77,22 @@ update_text_box()
 grid_frame = tk.Frame(root)
 grid_frame.pack()
 
-letter_labelss = []
 # Use a nested loop to create a grid of labels to display the letters
 for i in range(len(searchboard)):
     for j in range(len(searchboard[i])):
         # Create a label for the letter and add it to the grid frame
         letter_label = tk.Label(grid_frame, text=searchboard[i][j], width=3, height=1, font=("Helvetica", 15))
         letter_label.grid(row=i, column=j)
-        letter_labelss.append(letter_label)
-        
-        #if searchboard[i][j] in entered_words:
-        #    letter_label.configure(foreground='red')
 
-        
+
+# Create an entry box
+entry = tk.Entry(root)
+entry.pack()
+
+# Create a button to store the input and update the listbox
+button = tk.Button(root, text="Check my word!", command=lambda:[store_input(), update_words_listbox()])
+button.pack()
+
 def update_letter_colors():
     global user_input
     print('updating colors')
@@ -109,31 +110,6 @@ def update_letter_colors():
 
 # Call the update_letter_colors function to start updating the colors
 update_letter_colors()
-
-# def update_letter_colors():
-#     # Iterate through all the labels and change the color if the word is found
-#     for i, letter_label in enumerate(letter_labelss):
-#         if searchboard[j][i] in entered_words:
-#             letter_label.config(fg='red')
-#         else:
-#             letter_label.config(fg='black')
-#     root.after(100, update_letter_colors) # Update the color every 100 milliseconds
-
-# # Call the update_letter_colors function to start updating the colors
-# update_letter_colors()
-
-
-
-
-# Create an entry box
-entry = tk.Entry(root)
-entry.pack()
-
-# Create a button to store the input and update the listbox
-button = tk.Button(root, text="Check my word!", command=lambda:[store_input(), update_words_listbox()])
-button.pack()
-
-
 
 
 # Start the GUI event loop

@@ -1,7 +1,4 @@
 from only_the_words import word_list_spring
-from only_the_words import word_list_school
-from only_the_words import word_list_music 
-from only_the_words import  word_list_sports
 from check_fit_function import check_fit
 import numpy as np
 import random
@@ -11,14 +8,14 @@ def generate_board(num):
     from initial_random_board import board
     return board(num)
 
-words_for_board = random.sample(word_list_spring, 8)
+words_for_board_spring = random.sample(word_list_spring, 8)
 print('word bank')
-print(words_for_board)
+print(words_for_board_spring)
 
 
 individual_letters = []
 
-for word in words_for_board:
+for word in words_for_board_spring:
     letter_list = []
     for letter in word:
         letter_list.append(letter)
@@ -30,12 +27,12 @@ used_indices = []
 searchboard = generate_board(15)
 
 n=0
-letter_positions = {w : [] for w in words_for_board}
-while n<len(words_for_board):
+letter_positions = {w : [] for w in words_for_board_spring}
+while n<len(words_for_board_spring):
   possible_directions = []
-  print(words_for_board[n])
+  print(words_for_board_spring[n])
   while possible_directions == []:
-    len_word = len(words_for_board[n])
+    len_word = len(words_for_board_spring[n])
     size_board = len(searchboard)
     row_index = random.randint(0, size_board-1)
     column_index = random.randint(0, size_board-1)
@@ -52,7 +49,7 @@ while n<len(words_for_board):
     for x in range (0, (len_word)):
       print(individual_letters[n][x])
       searchboard[row_index] [column_index - x] = individual_letters[n][x]
-      letter_positions[words_for_board[n]].append(row_index * 15 + (column_index - x))
+      letter_positions[words_for_board_spring[n]].append(row_index * 15 + (column_index - x))
       used_indices.append((row_index, column_index - x))
 
   elif direction[0] == 'horizontal right':
@@ -60,7 +57,7 @@ while n<len(words_for_board):
     for x in range (0, (len_word)):
       print(individual_letters[n][x])
       searchboard[row_index] [column_index + x] = individual_letters[n][x]
-      letter_positions[words_for_board[n]].append(row_index * 15 + (column_index + x))
+      letter_positions[words_for_board_spring[n]].append(row_index * 15 + (column_index + x))
       used_indices.append((row_index, column_index + x))
     
   elif direction[0] == 'vertical up':
@@ -68,7 +65,7 @@ while n<len(words_for_board):
     for x in range (0, (len_word)):
       print(individual_letters[n][x])
       searchboard[row_index-x][column_index] = individual_letters[n][x]
-      letter_positions[words_for_board[n]].append((row_index-x) * 15 + column_index)
+      letter_positions[words_for_board_spring[n]].append((row_index-x) * 15 + column_index)
       used_indices.append((row_index-x, column_index))
     
   elif direction[0] == 'vertical down':
@@ -76,7 +73,7 @@ while n<len(words_for_board):
     for x in range (0, len_word):
       print(individual_letters[n][x])
       searchboard[row_index+x][column_index] = individual_letters[n][x]
-      letter_positions[words_for_board[n]].append((row_index+x) * 15 + column_index)
+      letter_positions[words_for_board_spring[n]].append((row_index+x) * 15 + column_index)
       used_indices.append((row_index+x, column_index))
  
   elif direction[0] == 'diagonal top to bottom':
@@ -84,7 +81,7 @@ while n<len(words_for_board):
     for x in range (0, len_word):
       print(individual_letters[n][x])
       searchboard[row_index+x] [column_index-x] = individual_letters[n][x]
-      letter_positions[words_for_board[n]].append((row_index+x) * 15 + (column_index-x))
+      letter_positions[words_for_board_spring[n]].append((row_index+x) * 15 + (column_index-x))
       used_indices.append((row_index+x, column_index-x))
 
   elif direction[0] == 'diagonal bottom to top':
@@ -92,13 +89,13 @@ while n<len(words_for_board):
     for x in range (0, len_word):
       print(individual_letters[n][x])
       searchboard[row_index-x] [column_index+x] = individual_letters[n][x]
-      letter_positions[words_for_board[n]].append((row_index-x) * 15 + (column_index+x))
+      letter_positions[words_for_board_spring[n]].append((row_index-x) * 15 + (column_index+x))
       used_indices.append((row_index-x, column_index+x))
   print('at the end of outer while loop',used_indices)
 
   #words_for_board.pop(0)
   n += 1 
-  print(words_for_board)
+  print(words_for_board_spring)
 
 print(searchboard) 
 print(used_indices) 
