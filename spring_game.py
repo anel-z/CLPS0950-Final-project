@@ -32,6 +32,7 @@ def store_input():
     elif (user_input in words_for_board_spring) and len(correct_words)==7:
         correct_words.append(user_input)
         messagebox.showinfo("Popup Message", "You found all the words! Yay!!" )
+        update_letter_colors()
     else:
         print('Wrong word!!')
         messagebox.showinfo("Popup Message", "Wrong word!!")
@@ -87,9 +88,6 @@ for i in range(len(searchboard)):
         letter_label = tk.Label(grid_frame, text=searchboard[i][j], width=3, height=1, font=("Helvetica", 15))
         letter_label.grid(row=i, column=j)
         letter_labelss.append(letter_label)
-        
-        #if searchboard[i][j] in entered_words:
-        #    letter_label.configure(foreground='red')
 
         
 def update_letter_colors():
@@ -101,28 +99,14 @@ def update_letter_colors():
             letter_label.config(fg='red')
             print(f'updating letter {searchboard[i//15][i%15]}')
             letter_label.update()
-        else:
-            letter_label.config(fg='black')
-            letter_label.update()
+        #else:
+            #letter_label.config(fg='black')
+            #letter_label.update()
     grid_frame.update()
-    # root.after(100, update_letter_colors) # Update the color every 100 milliseconds
+    #root.after(100, update_letter_colors) # Update the color every 100 milliseconds
 
 # Call the update_letter_colors function to start updating the colors
 update_letter_colors()
-
-# def update_letter_colors():
-#     # Iterate through all the labels and change the color if the word is found
-#     for i, letter_label in enumerate(letter_labelss):
-#         if searchboard[j][i] in entered_words:
-#             letter_label.config(fg='red')
-#         else:
-#             letter_label.config(fg='black')
-#     root.after(100, update_letter_colors) # Update the color every 100 milliseconds
-
-# # Call the update_letter_colors function to start updating the colors
-# update_letter_colors()
-
-
 
 
 # Create an entry box

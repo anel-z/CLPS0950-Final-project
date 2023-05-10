@@ -67,7 +67,7 @@ while n<len(words_for_board_school):
       searchboard[row_index-x][column_index] = individual_letters[n][x]
       letter_positions[words_for_board_school[n]].append((row_index-x) * 15 + column_index)
       used_indices.append((row_index-x, column_index))
-    
+
   elif direction[0] == 'vertical down':
     print("here 4")
     for x in range (0, len_word):

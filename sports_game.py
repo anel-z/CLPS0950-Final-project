@@ -8,6 +8,8 @@ correct_words = []
 
 # Create a window
 root = tk.Tk()
+global user_input
+user_input = ''
 
 #stores input in user_input and appends it to entered_words list
 #prints both last entered word and list with all entered words
@@ -27,9 +29,12 @@ def store_input():
         print('You found a word!')
         messagebox.showinfo("Popup Message", "You found a word!")
         correct_words.append(user_input)
+        update_letter_colors()
+
     elif (user_input in words_for_board_sports) and len(correct_words)==7:
         correct_words.append(user_input)
         messagebox.showinfo("Popup Message", "You found all the words! Yay!!" )
+        update_letter_colors()
     else:
         print('Wrong word!!')
         messagebox.showinfo("Popup Message", "Wrong word!!")
@@ -77,21 +82,16 @@ update_text_box()
 grid_frame = tk.Frame(root)
 grid_frame.pack()
 
+letter_labelss = []
 # Use a nested loop to create a grid of labels to display the letters
 for i in range(len(searchboard)):
     for j in range(len(searchboard[i])):
         # Create a label for the letter and add it to the grid frame
         letter_label = tk.Label(grid_frame, text=searchboard[i][j], width=3, height=1, font=("Helvetica", 15))
         letter_label.grid(row=i, column=j)
+        letter_labelss.append(letter_label)
 
 
-# Create an entry box
-entry = tk.Entry(root)
-entry.pack()
-
-# Create a button to store the input and update the listbox
-button = tk.Button(root, text="Check my word!", command=lambda:[store_input(), update_words_listbox()])
-button.pack()
 
 def update_letter_colors():
     global user_input
@@ -102,14 +102,23 @@ def update_letter_colors():
             letter_label.config(fg='red')
             print(f'updating letter {searchboard[i//15][i%15]}')
             letter_label.update()
-        else:
-            letter_label.config(fg='black')
-            letter_label.update()
+        #else:
+            #letter_label.config(fg='black')
+            #letter_label.update()
     grid_frame.update()
-    # root.after(100, update_letter_colors) # Update the color every 100 milliseconds
+    #root.after(100, update_letter_colors) # Update the color every 100 milliseconds
 
 # Call the update_letter_colors function to start updating the colors
 update_letter_colors()
+
+
+# Create an entry box
+entry = tk.Entry(root)
+entry.pack()
+
+# Create a button to store the input and update the listbox
+button = tk.Button(root, text="Check my word!", command=lambda:[store_input(), update_words_listbox()])
+button.pack()
 
 
 # Start the GUI event loop

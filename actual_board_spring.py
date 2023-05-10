@@ -3,7 +3,6 @@ from check_fit_function import check_fit
 import numpy as np
 import random
 
-
 def generate_board(num):
     from initial_random_board import board
     return board(num)
