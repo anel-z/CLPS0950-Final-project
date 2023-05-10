@@ -3,6 +3,7 @@ import numpy as np
 from numpy import random
 from number2alphabet import NumtoAlph
 
+#creating the random board of letters by replacing numbers with their corresponding letters 
 def board(int):
   array = np.chararray((int,int))
   for n in range (0,int):

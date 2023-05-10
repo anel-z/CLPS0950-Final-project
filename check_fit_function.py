@@ -1,6 +1,10 @@
 
+#function that checks which of the directions the selected words fits in, and appends that to the list of possible directions if 
+#none of the indices that would be needed to insert the word in that direction have already been used by another word
 def check_fit(row_index, column_index, len_word, size_board, used_indices):
   directions = []
+
+  #these print statements are for troubleshooting
   print('horizontal right ',  [(row_index, i) for i in range (column_index, column_index + len_word)], not any([(row_index, i)  in used_indices for i in range (column_index, column_index + len_word)]))
   print((column_index, column_index + len_word))
   print('horizontal left', [(row_index, i) for i in range (column_index-len_word +1, column_index +1)], not any([(i, column_index)  in used_indices for i in range (row_index, row_index-len_word)]))
@@ -13,6 +17,8 @@ def check_fit(row_index, column_index, len_word, size_board, used_indices):
   print(0, len_word)
   print('diagonal b to t', [(row_index-i, column_index+i) for i in range(0, len_word)] , not any([(row_index-i, column_index+i)  in used_indices for i in (0, len_word)]))
   print(0, len_word)
+
+  ##beginnning of the actual code checking the directions 
   if len_word <= (column_index+1) and not any([(row_index, i)  in used_indices for i in range (column_index-len_word +1, column_index +1)]):
       directions.append('horizontal left')
   

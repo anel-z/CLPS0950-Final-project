@@ -3,6 +3,7 @@ from check_fit_function import check_fit
 import numpy as np
 import random
 
+##see actual_board_spring for commented code
 
 def generate_board(num):
     from initial_random_board import board
